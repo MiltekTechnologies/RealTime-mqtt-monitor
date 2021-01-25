@@ -16,6 +16,6 @@ sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools  <br />
 >-amazone iot mqtt credentails (certificates, endpoint and permission for subscribing specific topic)  <br />
 
 <br />
-sample image : 
+sample image (old): 
 
 ![mqqtt-monitor](https://github.com/MiltekTechnologies/RealTime-mqtt-monitor/blob/master/images/table_final.JPG)
