@@ -10,14 +10,14 @@ import json
 import sqlite3
 from sqlite3 import Error
 import os
-
+import datetime
 
 #data_path = '/'
 filename = 'data_from_mqtt'
 
 #os.makedirs(data_path, exist_ok=True)
 db = sqlite3.connect(filename + '.sqlite3')
-db.execute('CREATE TABLE IF NOT EXISTS CarData (id INTEGER PRIMARY KEY, name Text NOT NULL,cpn Text NOT NULL,image Text NOT NULL)')
+db.execute('CREATE TABLE IF NOT EXISTS CarData (id INTEGER PRIMARY KEY,date timestamp , name Text NOT NULL,cpn Text NOT NULL,image Text NOT NULL)')
 db.close()
 # This sample uses the Message Broker for AWS IoT to send and receive messages
 # through an MQTT connection. On startup, the device connects to the server,
@@ -87,11 +87,12 @@ def on_message_received(topic, payload, **kwargs):
     name=dict_msg['sid']
     cpn = dict_msg['cpn']
     image=dict_msg['img_cpn']
+    date = datetime.datetime.now()
     db = sqlite3.connect(filename + '.sqlite3')
     c = db.cursor()
-    values=(name,cpn,image)
-    sql = ''' INSERT INTO CarData(name,cpn,image)
-                      VALUES(?,?,?) '''
+    values=(date,name,cpn,image)
+    sql = ''' INSERT INTO CarData(date,name,cpn,image)
+                      VALUES(?,?,?,?) '''
     c.execute(sql, values)
     db.commit()
 

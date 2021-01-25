@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         # db = sqlite3.connect('whatever.sqlite3')
         # c = db.cursor()
         # c.execute(
-        #     'SELECT * FROM(SELECT * FROM CarData ORDER BY id DESC LIMIT 10)ORDER BY id ASC')
+        #     'SELECT name,cpn,image FROM(SELECT * FROM CarData ORDER BY id DESC LIMIT 10)ORDER BY id ASC')
         # items = c.fetchall()
         # print(items)
         # for item in items:
@@ -54,7 +54,7 @@ class Ui_MainWindow(object):
             #     item[0], item[1], item[2], item[3]))
         
         connection=sqlite3.connect('data_from_mqtt.sqlite3')
-        query = "SELECT * FROM(SELECT * FROM CarData ORDER BY id DESC LIMIT 11)ORDER BY id DESC"
+        query = "SELECT date,name,cpn,image FROM(SELECT * FROM CarData ORDER BY id DESC LIMIT 11)ORDER BY id DESC"
         result= connection.execute(query)
         # print(result)
         self.tableWidget.setRowCount(0)
@@ -90,6 +90,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnCount(4)
         self.tableWidget.rowResized(50, 50, 50)
         self.tableWidget.setObjectName("tableWidget")
+        #self.tableWidget.setFont(QtGui.QFont('Arial',20))
         item = QtWidgets.QTableWidgetItem()
         font = QtGui.QFont()
         font.setFamily("Arial Black")
@@ -99,7 +100,7 @@ class Ui_MainWindow(object):
         item.setFont(font)
 
         self.tableWidget.setHorizontalHeaderLabels(
-            ['id', 'Name', 'cpn', 'image_cpn'])
+            ['Timestamp', 'Name', 'cpn', 'image_cpn'])
         # self.tableWidget.setRowCount(5)
 
 
