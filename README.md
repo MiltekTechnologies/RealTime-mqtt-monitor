@@ -18,4 +18,4 @@ sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools  <br />
 <br />
 sample image (old): 
 
-![mqqtt-monitor](https://github.com/MiltekTechnologies/RealTime-mqtt-monitor/blob/master/images/table_final.JPG)
+![mqqtt-monitor](https://github.com/MiltekTechnologies/RealTime-mqtt-monitor/blob/master/images/table_final.png)
