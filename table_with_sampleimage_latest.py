@@ -18,27 +18,6 @@ import time
 
 
 
-
-
-# class ImgWidget1(QtWidgets.QLabel):
-
-#     def __init__(self, imagePath, parent=None):
-#         super(ImgWidget1, self).__init__(parent)
-#         pic = QtGui.QPixmap(imagePath)
-#         self.setAlignment(QtCore.Qt.AlignCenter)
-#         self.setPixmap(pic)
-
-# class ImageWidget(QtWidgets.QWidget):
-
-#     def __init__(self, imagePath, parent):
-#         super(ImageWidget, self).__init__(parent)
-#         self.picture = QtGui.QPixmap(imagePath)
-
-#     def paintEvent(self, event):
-#         painter = QtGui.QPainter(self)
-#         painter.drawPixmap(0, 0, self.picture)
-
-
 class Ui_MainWindow(object):
     
     def addData(self):
@@ -137,8 +116,9 @@ class Ui_MainWindow(object):
         # Hheader.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         Hheader.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         Vheader = self.tableWidget.verticalHeader()
+        Vheader.setDefaultSectionSize(150)
         # Vheader.setSectionResizeMode(0, QtWidgets.QHeaderView.)
-        Vheader.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        #Vheader.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         # Vheader.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         # Vheader.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         # self.tableWidget.setItem(
