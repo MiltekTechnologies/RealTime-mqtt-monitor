@@ -19,19 +19,10 @@ import time
 
 
 class Ui_MainWindow(object):
-    
+
+    Wwidth=0
+    Wheight=0
     def addData(self):
-        # db = sqlite3.connect('whatever.sqlite3')
-        # c = db.cursor()
-        # c.execute(
-        #     'SELECT * FROM(SELECT * FROM CarData ORDER BY id DESC LIMIT 10)ORDER BY id ASC')
-        # items = c.fetchall()
-        # print(items)
-        # for item in items:
-            # print(items)
-            # print("{}{}{}{}".format(
-            #     item[0], item[1], item[2], item[3]))
-        
         connection=sqlite3.connect('data_from_mqtt.sqlite3')
         query = "SELECT name,class_st,cpn,image FROM(SELECT * FROM CarData ORDER BY id DESC LIMIT 11)ORDER BY id DESC"
         result= connection.execute(query)
@@ -56,9 +47,10 @@ class Ui_MainWindow(object):
         connection.close()
         # db.close()
         QtCore.QTimer.singleShot(100, self.addData)
+        
     def setupUi(self, MainWindow,rect):
-        Wwidth=rect.width()
-        Wheight=rect.height()
+        self.Wwidth = rect.width() - rect.width()/48
+        self.Wheight = rect.height()-rect.height()/17
         MainWindow.setObjectName("MainWindow")
         # MainWindow.r
 
@@ -67,7 +59,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         # self.tableWidget.setGeometry(showMaximized())
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0,Wwidth ,Wheight ))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 0,self.Wwidth ,self.Wheight ))
         # self.tableWidget.setRowCount(5)
         self.tableWidget.setColumnCount(4)
         self.tableWidget.rowResized(50, 50, 50)
@@ -83,31 +75,7 @@ class Ui_MainWindow(object):
 
         self.tableWidget.setHorizontalHeaderLabels(
             ['Name', 'Class', 'cpn', 'image_cpn'])
-        # self.tableWidget.setRowCount(5)
 
-
-        # pic = "https://flyawaysimulation.com/images/downloadshots/7592-road-v11zip-84-screen-9.jpg"
-        # # url = "https://flyawaysimulation.com/images/downloadshots/7592-road-v11zip-84-screen-9.jpg"
-        
-        # # image extension *.png,*.jpg
-        
-        # # pic = Image.open(requests.get(url, stream=True).raw)
-        
-        # # new_width = 100
-        # # new_height = 100
-        # # pic = pic.resize((new_width, new_height), Image.ANTIALIAS)
-
-        # r = requests.get(pic, stream=True)
-        # assert r.status_code == 200
-        # img = QtGui.QImage()
-
-        # assert img.loadFromData(r.content)
-
-        # self.label = QtWidgets.QLabel()
-        # # self.label.setFixedHeight(100)
-        # # self.label.setPixmap(QtGui.QPixmap.fromImage(img))
-        # self.label.setPixmap(QtGui.QPixmap(img).scaled(
-        #     QtCore.QSize(250, 100), QtCore.Qt.KeepAspectRatio))
         
 
         Hheader = self.tableWidget.horizontalHeader()
@@ -117,21 +85,6 @@ class Ui_MainWindow(object):
         Hheader.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         Vheader = self.tableWidget.verticalHeader()
         Vheader.setDefaultSectionSize(150)
-        # Vheader.setSectionResizeMode(0, QtWidgets.QHeaderView.)
-        #Vheader.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-        # Vheader.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
-        # Vheader.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
-        # self.tableWidget.setItem(
-        #     1, 0, QtWidgets.QTableWidgetItem("1"))
-        # self.tableWidget.setItem(
-        #     1, 1, QtWidgets.QTableWidgetItem("Honda"))
-        # self.tableWidget.setItem(
-        #     1, 2, QtWidgets.QTableWidgetItem("KL08U0045"))
-
-        # self.tableWidget.setCellWidget(1, 3, (self.label))
-
-        # self.load_button = QtWidgets.QPushButton(self.centralwidget)
-        # self.load_button.setGeometry(QtCore.QRect(110, 320, 141, 51))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(16)
