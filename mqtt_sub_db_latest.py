@@ -94,7 +94,12 @@ def on_message_received(topic, payload, **kwargs):
     sql = ''' INSERT INTO CarData(class_st,name,cpn,image)
                       VALUES(?,?,?,?) '''
     c.execute(sql, values)
-    db.commit()
+    try:
+        db.commit()
+    except sqlite3.Error as er:
+        print("Exception class is: ", er.__class__)
+        time.sleep(1)
+        db.commit()
 
     global received_count
     received_count += 1
