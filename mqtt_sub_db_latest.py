@@ -96,10 +96,12 @@ def on_message_received(topic, payload, **kwargs):
     c.execute(sql, values)
     try:
         db.commit()
+        db.close()
     except sqlite3.Error as er:
         print("Exception class is: ", er.__class__)
         time.sleep(1)
         db.commit()
+        db.close()
 
     global received_count
     received_count += 1
