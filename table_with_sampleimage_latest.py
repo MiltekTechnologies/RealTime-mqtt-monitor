@@ -15,7 +15,11 @@ import json
 import requests
 import sqlite3
 import time
+import boto3
 
+
+client = boto3.client('s3')
+bucket_name = 'demo-blugraph-services'
 
 
 class Ui_MainWindow(object):
@@ -33,13 +37,17 @@ class Ui_MainWindow(object):
             for col_no, data in enumerate(row_data):
                 # https://th.bing.com/th/id/OIP.hTOhGoZsXbOOKVkA62c05wHaFj?pid=Api&rs=1
                 if(col_no==3):
-                    pic = "https://th.bing.com/th/id/OIP.hTOhGoZsXbOOKVkA62c05wHaFj?pid=Api&rs=1"
+                    pic = client.generate_presigned_url('get_object', Params = { 'Bucket': bucket_name, 'Key':data, }, 
+                                            ExpiresIn = 86400, )
+                    #print(pic)
+                    #pic = "https://th.bing.com/th/id/OIP.hTOhGoZsXbOOKVkA62c05wHaFj?pid=Api&rs=1"
                     r = requests.get(pic, stream=True)
                     assert r.status_code == 200
                     img = QtGui.QImage()
                     assert img.loadFromData(r.content)
                     self.label = QtWidgets.QLabel()
-                    self.label.setPixmap(QtGui.QPixmap(img).scaled(QtCore.QSize(550, 150), QtCore.Qt.KeepAspectRatio))
+                    self.label.setAlignment(QtCore.Qt.AlignCenter)
+                    self.label.setPixmap(QtGui.QPixmap(img).scaled(QtCore.QSize(250, 150), QtCore.Qt.KeepAspectRatio))
                     self.tableWidget.setCellWidget(row_no, col_no, self.label)
                 else:
                     self.tableWidget.setItem(row_no, col_no, QtWidgets.QTableWidgetItem(str(data)))
