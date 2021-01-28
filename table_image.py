@@ -35,12 +35,9 @@ class Ui_MainWindow(object):
         for row_no, row_data in enumerate(result ):
             self.tableWidget.insertRow(row_no)
             for col_no, data in enumerate(row_data):
-                # https://th.bing.com/th/id/OIP.hTOhGoZsXbOOKVkA62c05wHaFj?pid=Api&rs=1
                 if(col_no==3):
                     pic = client.generate_presigned_url('get_object', Params = { 'Bucket': bucket_name, 'Key':data, }, 
                                             ExpiresIn = 86400, )
-                    #print(pic)
-                    #pic = "https://th.bing.com/th/id/OIP.hTOhGoZsXbOOKVkA62c05wHaFj?pid=Api&rs=1"
                     r = requests.get(pic, stream=True)
                     assert r.status_code == 200
                     img = QtGui.QImage()
@@ -99,10 +96,6 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         font.setKerning(True)
-
-        # self.load_button.setFont(font)
-        # self.load_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        # self.load_button.setObjectName("load_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 806, 21))
@@ -124,30 +117,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
-        # item = self.tableWidget.item(0, 0)
-        # item.setText(_translate("MainWindow", "Block"))
-        # item = self.tableWidget.item(0, 1)
-        # item.setText(_translate("MainWindow", "CPN"))
-        # item = self.tableWidget.item(0, 2)
-        # item.setText(_translate("MainWindow", "DIR"))
-        # item = self.tableWidget.item(0, 3)
-        # item.setText(_translate("MainWindow", "img_bb"))
-        # item = self.tableWidget.item(0, 4)
-        # item.setText(_translate("MainWindow", "img_cpn"))
-        # item = self.tableWidget.item(0, 5)
-        # item.setText(_translate("MainWindow", "img_usr"))
-        # item = self.tableWidget.item(0, 6)
-        # item.setText(_translate("MainWindow", "SID"))
-        # item = self.tableWidget.item(0, 7)
-        # item.setText(_translate("MainWindow", "TS"))
-        # item = self.tableWidget.item(0, 8)
-        # item.setText(_translate("MainWindow", "TS_r"))
-        # item = self.tableWidget.item(0, 9)
-        # item.setText(_translate("MainWindow", "VID"))
-        # item = self.tableWidget.item(0, 10)
-        # item.setText(_translate("MainWindow", "VT"))
-        # item = self.tableWidget.item(0, 11)
-        # item.setText(_translate("MainWindow", "Zone"))
         self.tableWidget.setSortingEnabled(__sortingEnabled)
         # self.load_button.setText(_translate("MainWindow", "Load Data"))
 
