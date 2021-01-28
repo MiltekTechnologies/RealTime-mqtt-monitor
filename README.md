@@ -3,7 +3,8 @@ A real time Mqtt server monitor with pyqt. <br />
 
 
 Requirements <br />
-
+>-pip install boto3
+give credentials for s3 bucket
 >-pip install awsiotsdk <br />
 Build from source :  <br />
 git clone https://github.com/aws/aws-iot-device-sdk-python-v2.git  <br />
