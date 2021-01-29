@@ -45,6 +45,13 @@ class Ui_MainWindow(object):
                     if(col_no==3):
                         pic = client.generate_presigned_url('get_object', Params = { 'Bucket': bucket_name, 'Key':data, }, 
                                                 ExpiresIn = 86400, )
+                        try:
+                            r = requests.get(pic, stream=True)
+                        except requests.exceptions.ConnectionError:
+                            time.sleep(1)
+                            r = requests.get(pic, stream=True)
+                            #r.status_code = "Connection refused"
+                            pass
                         r = requests.get(pic, stream=True)
                         assert r.status_code == 200
                         img = QtGui.QImage()
